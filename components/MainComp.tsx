@@ -6,14 +6,24 @@ import image_3 from "../assets/test/images/image-3.png";
 import image_4 from "../assets/test/images/image-4.png";
 import image_5 from "../assets/test/images/image-5.png";
 import image_6 from "../assets/test/images/image-6.png";
+import image_7 from "../assets/test/images/image-7.png";
 
 // styled-components/native types moved to @types/styled-components-react-native
 import styled from "styled-components/native";
 import { LinearGradient } from "expo-linear-gradient";
 import SmallCard from "../atoms/SmallCard";
 import BigCard from "../atoms/BigCard";
+import RankList from "../atoms/RankList";
+
+const Categories = ["BREAK", "HIPHOP", "POPPIN"];
 
 function MainComp() {
+  const [selCat, setSelCat] = React.useState<string>("BREAK");
+
+  const changeCategory = React.useCallback((cat: string) => {
+    setSelCat(cat);
+  }, []);
+
   return (
     <MainView stickyHeaderIndices={[1]}>
       <Header.Empty />
@@ -65,33 +75,22 @@ function MainComp() {
             걍 춤이나 배워보세요
           </Text>
           <Header.NavView>
-            <Header.NavItem isActive={true} activeOpacity={0.3}>
-              <Header.NavText
-                style={{
-                  opacity: true ? 1 : 0.3,
-                }}
+            {Categories.map((cat, idx) => (
+              <Header.NavItem
+                onPress={() => changeCategory(cat)}
+                key={idx}
+                isActive={selCat === cat}
+                activeOpacity={0.7}
               >
-                BREAK
-              </Header.NavText>
-            </Header.NavItem>
-            <Header.NavItem isActive={false} activeOpacity={0.3}>
-              <Header.NavText
-                style={{
-                  opacity: false ? 1 : 0.3,
-                }}
-              >
-                HIPHOP
-              </Header.NavText>
-            </Header.NavItem>
-            <Header.NavItem isActive={false} activeOpacity={0.3}>
-              <Header.NavText
-                style={{
-                  opacity: false ? 1 : 0.3,
-                }}
-              >
-                POPPIN
-              </Header.NavText>
-            </Header.NavItem>
+                <Header.NavText
+                  style={{
+                    opacity: selCat === cat ? 1 : 0.3,
+                  }}
+                >
+                  {cat}
+                </Header.NavText>
+              </Header.NavItem>
+            ))}
           </Header.NavView>
         </Header.ContentView>
       </Header.View>
@@ -178,9 +177,29 @@ function MainComp() {
           />
         </Teachers.ContentView>
       </Teachers.View>
+      <Rank.View>
+        <Title.Sub>선생 순위를 정하는 레이아웃</Title.Sub>
+        <Title.View>
+          <Title.Text>순위 제목</Title.Text>
+          <Title.More>더보기</Title.More>
+        </Title.View>
+        <Rank.ContentView horizontal>
+          {[image_2, image_7].map((img, idx) => (
+            <RankList imgSrc={img} key={idx} isLast={idx === 1} />
+          ))}
+        </Rank.ContentView>
+      </Rank.View>
     </MainView>
   );
 }
+
+const Rank = {
+  View: styled.View`
+    padding: 20px 0 30px 20px;
+    background-color: #0d198c;
+  `,
+  ContentView: styled.ScrollView``,
+};
 
 const Title = {
   View: styled.View`
