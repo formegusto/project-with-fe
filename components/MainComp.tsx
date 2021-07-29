@@ -4,7 +4,6 @@ import image from "../assets/test/images/image-1.png";
 import image_2 from "../assets/test/images/image-2.png";
 import image_3 from "../assets/test/images/image-3.png";
 import image_4 from "../assets/test/images/image-4.png";
-import image_5 from "../assets/test/images/image-5.png";
 import image_6 from "../assets/test/images/image-6.png";
 import image_7 from "../assets/test/images/image-7.png";
 
@@ -14,6 +13,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import SmallCard from "../atoms/SmallCard";
 import BigCard from "../atoms/BigCard";
 import RankList from "../atoms/RankList";
+import AdCarousel from "../atoms/AdCarousel";
+
+import logo from "../assets/test/icons/logo.png";
+import facebook from "../assets/test/icons/facebook.png";
+import youtube from "../assets/test/icons/youtube.png";
+import instagram from "../assets/test/icons/instagram.png";
+import { Image } from "react-native";
 
 const Categories = ["BREAK", "HIPHOP", "POPPIN"];
 
@@ -189,9 +195,156 @@ function MainComp() {
           ))}
         </Rank.ContentView>
       </Rank.View>
+      <Ad.View>
+        <Title.View>
+          <Title.Text>대회를 홍보할거임</Title.Text>
+          <Title.More>더보기</Title.More>
+        </Title.View>
+        <Ad.ContentView>
+          <AdCarousel />
+        </Ad.ContentView>
+      </Ad.View>
+      <TheWith.View>
+        <TheWith.ContentView>
+          <Image
+            source={logo}
+            style={{
+              width: 50,
+              height: 50,
+            }}
+          />
+          <TheWith.Text_1
+            style={{
+              marginTop: 23,
+              marginBottom: 15,
+            }}
+          >
+            함께 하고 싶다고요?
+          </TheWith.Text_1>
+          <TheWith.Text_1
+            style={{
+              marginBottom: 44,
+            }}
+          >
+            그러면 연락해
+          </TheWith.Text_1>
+          <TheWith.CallButton activeOpacity={0.7}>
+            <TheWith.ButtonText>연락하기</TheWith.ButtonText>
+          </TheWith.CallButton>
+          <TheWith.BottomContent>
+            <TheWith.SNSList>
+              <TheWith.SNSIcon
+                source={facebook}
+                style={{
+                  width: 24,
+                  height: 24,
+                  marginRight: 35,
+                }}
+              />
+              <TheWith.SNSIcon
+                source={instagram}
+                style={{
+                  width: 24,
+                  height: 24,
+                  marginRight: 35,
+                }}
+              />
+              <TheWith.SNSIcon
+                source={youtube}
+                style={{
+                  width: 30,
+                  height: 30,
+                }}
+              />
+            </TheWith.SNSList>
+            <TheWith.Text_2>위드 어플 짱짱 맨 오예</TheWith.Text_2>
+            <TheWith.Text_3>minwoo5836@gmail.com</TheWith.Text_3>
+          </TheWith.BottomContent>
+        </TheWith.ContentView>
+      </TheWith.View>
     </MainView>
   );
 }
+
+const TheWith = {
+  BottomContent: styled.View`
+    margin: 46px 0 0;
+    width: 100%;
+  `,
+  SNSList: styled.View`
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 26px;
+  `,
+  SNSIcon: styled.Image``,
+  View: styled.View`
+    padding: 30px 20px 20px 20px;
+    background-color: #0d198c;
+  `,
+  ContentView: styled.View`
+    align-items: flex-start;
+  `,
+  Text_1: styled.Text`
+    font-family: "Roboto-Bold";
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+
+    color: #ffffff;
+  `,
+  Text_2: styled.Text`
+    font-family: "Roboto-Bold";
+
+    font-size: 14px;
+    line-height: 16px;
+    margin: 0 0 4px;
+    /* identical to box height, or 114% */
+
+    text-align: center;
+
+    color: #949bd7;
+  `,
+  Text_3: styled.Text`
+    font-family: "Roboto";
+
+    font-size: 10px;
+    line-height: 16px;
+    /* identical to box height, or 160% */
+
+    text-align: center;
+
+    color: #949bd7;
+  `,
+  CallButton: styled.TouchableOpacity`
+    justify-content: center;
+    align-items: center;
+
+    width: 152px;
+    height: 70px;
+
+    background: #7784ff;
+    border-radius: 17px;
+  `,
+  ButtonText: styled.Text`
+    font-family: "Roboto";
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+
+    color: #ffffff;
+  `,
+};
+
+const Ad = {
+  View: styled.View`
+    padding: 20px 0 7px 20px;
+    background-color: #0012b5;
+  `,
+  ContentView: styled.View`
+    padding: 0 20px 0 0;
+  `,
+};
 
 const Rank = {
   View: styled.View`
